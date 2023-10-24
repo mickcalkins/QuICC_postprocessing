@@ -6,7 +6,7 @@ from __future__ import print_function # this is for python 3 compatability
 import numpy as np
 import h5py
 
-filename = 'visState0000.hdf5'
+filename = 'visState0001.hdf5'
 
 f = h5py.File(filename, 'r')
 

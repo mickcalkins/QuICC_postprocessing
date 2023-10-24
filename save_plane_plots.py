@@ -16,8 +16,8 @@ from read_parameter_file import read_box
 # just used to name file
 run_entry = str(sys.argv[1])
 
-# provide the name of the file to be read - no need for .hdf5
-filename = 'visState0000.hdf5'
+# provide the name of the file to be read 
+filename = 'visState0036.hdf5'
 
 # import relevant parameters/quantities/arrays
 #Q, Ra, Pm, Pr = read_visState.read_params_MC(filename)
@@ -44,7 +44,7 @@ y = np.linspace(0, Gamma, num=np.size(y_c), endpoint=False)
 temp, mean_temp, ux, uy, uz, vortx, vorty, vortz, bx, by, bz = read_visState.read_data_MC(filename)
 
 
-data = temp
+data = vortz
 
 #cmap = plt.get_cmap('PiYG')
 #cmap = plt.get_cmap('bwr')
@@ -62,7 +62,7 @@ plt.axis('off')
 plt.savefig( 'temp' + '_midplane_' + run_entry + '.png', dpi=300, bbox_inches="tight")
 
 plt.figure(2)
-zp = int(8)
+zp = int(0)
 data_slice = np.squeeze(data[zp, :, :])
 plt.pcolormesh(dim1, dim2, np.transpose(data_slice), cmap=cmap, shading='gouraud')
 plt.axis('equal')

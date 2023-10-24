@@ -48,7 +48,7 @@ time = time[1:len(time)] # strip out hash symbol
 # find the number of times data was output
 num_times = len(data)-1
 
-#print(data[1:])
+print('number of records =', num_times)
 
 #sys.exit()
 
