@@ -13,7 +13,7 @@ def energy_spectra(directory, fn = 'All_Files', comp=0,interp = True):
 #comp-- array to specify which element(s) to take spectra of 0-- full field, 1--barotropic, 2--baroclinic. Can choose more than one value ([0,1,2]) gives all values
 #interp -- boolean to specify whether to interpolate between integer k.
     param = directory + 'parameters.cfg'
-    box2D,kc2D = rpf.read_box(param)
+    box2D,box3D,kc2D,kc3D = rpf.read_box(param)
     dim2D,dim3D = rpf.read_res(param)
     dir_contents = []
     print('******** Simulation Parameters ********')

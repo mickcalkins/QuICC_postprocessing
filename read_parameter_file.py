@@ -37,6 +37,26 @@ def read_box(filename):
     
     return box2D, box3D, kc2D, kc3D
 
+def read_res(filename):
+
+    fh = open(filename, 'r')
+
+    # names of things to find
+    find_dim2 = '/dim2D'
+    find_dim3 = '/dim3D'
+
+    for num, line in enumerate(fh, 1):
+        if find_dim2 in line:
+            data = line.lstrip()
+            datanew = data.replace('<dim2D>','')
+            dim2D = float(datanew.replace('</dim2D>',''))
+        if find_dim3 in line:
+            data = line.lstrip()
+            datanew = data.replace('<dim3D>','')
+            dim3D = float(datanew.replace('</dim3D>',''))
+      
+    return dim2D, dim3D
+
 def read_nondims(filename):
 
     fh = open(filename, 'r')

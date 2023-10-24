@@ -18,7 +18,7 @@ plt.rcParams.update({'font.size': 18})
 
 fig,ax = plt.subplots(1,1)
 
-plt.plot(k, E_k, 'k')
+plt.plot(k[1:], E_k[1:], 'k')
 plt.xlabel(r'$k$', labelpad=0)
 plt.ylabel(r'$E_k$', rotation=0, labelpad=15)
 plt.yscale('log')
