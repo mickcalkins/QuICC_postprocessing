@@ -7,7 +7,7 @@ Reads in a 'nusselt.dat' file and plots it.
 from __future__ import print_function
 import numpy as np
 import matplotlib.pyplot as plt
-
+import pandas as pd
 
 # initialize
 time = []
@@ -29,6 +29,11 @@ f.close()
 # convert to array
 time = np.asarray(time, dtype=np.double)
 Nu = np.asarray(Nu, dtype=np.double)
+Nu_series = pd.Series(Nu)
+windows = Nu_series.expanding()
+moving_averages = windows.mean()
+Nu_moving_average = moving_averages.tolist()
+
 
 Nu_ave = round(np.mean(Nu), 4)
 Nu_std = round(np.std(Nu), 4)
@@ -36,7 +41,7 @@ Nusselt = 'Nu = ' + str(Nu_ave) + ' +/- ' + str(Nu_std)
 print('Time-averaged Nusselt # =', Nu_ave, '+/-', Nu_std)
 
 plt.plot(time,Nu)
-
+plt.plot(time,Nu_moving_average, '--')
 plt.xlabel('time')
 plt.ylabel('Nusselt')
 

@@ -9,7 +9,7 @@ import h5py as hf
 import numpy.ma as ma
 import time
 
-def energy_spectra(directory, fn = 'All_Files', comp=0,interp = True):
+def energy_spectra(directory, fn = 'All_Files', comp=2,interp = True):
 #comp-- array to specify which element(s) to take spectra of 0-- full field, 1--barotropic, 2--baroclinic. Can choose more than one value ([0,1,2]) gives all values
 #interp -- boolean to specify whether to interpolate between integer k.
     param = directory + 'parameters.cfg'

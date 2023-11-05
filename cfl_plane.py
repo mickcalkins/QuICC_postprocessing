@@ -15,7 +15,7 @@ from read_parameter_file import read_box
 
 
 # provide the name of the file to be read - no need for .hdf5
-filename = 'visState0001.hdf5'
+filename = 'visState0000.hdf5'
 
 # import relevant parameters/quantities/arrays
 #Q, Ra, Pm, Pr = read_visState.read_params_MC(filename)
