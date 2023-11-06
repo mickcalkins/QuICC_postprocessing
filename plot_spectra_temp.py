@@ -74,7 +74,7 @@ ax1.loglog(k_x+1, np.abs(data_spec_blz_x[0:true_size_x]), label=r'$|\widehat{f}_
 ax1.loglog(k_x+1, np.abs(data_spec_midz_x[0:true_size_x]), label=r'$|\widehat{f}_{mid}|$')
 plt.xlabel(r'$k_x+1$', fontsize=18)
 #ax1.set_ylim(1e-15*max_x, 2*max_x_plot)
-ax1.set_ylim(1e-17, 2*max_x_plot)
+ax1.set_ylim(1e-6*max_x, 2*max_x_plot)
 legend = plt.legend(loc='best', shadow=False, ncol = 2, fontsize = 18, frameon=False)
 
 ax1.tick_params(labelright=True, right=True)
