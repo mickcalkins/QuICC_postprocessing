@@ -59,13 +59,27 @@ data_ave, data_rms = compute_stats.stats(data)
 
 zp = 0.5*(1. - z)
 
-#plt.plot(data_ave, zp, 'ko-')
-#plt.plot(data_z, zp, 'ko-')
-plt.plot(data_rms, zp, 'ko-')
-plt.xlabel(entry)
+fig1,ax1 = plt.subplots(1,1)
+plt.rcParams["mathtext.fontset"] = "cm"
+
+ax1.plot(data_rms, zp, 'ko-')
+plt.xlabel(r'$\theta_{rms}$')
 plt.ylabel(r'$z$', rotation=0)
 
 savefile = 'rms_profile_' + entry + '.png'
 plt.savefig(savefile)
+
+
+fig2,ax2 = plt.subplots(1,1)
+
+ax2.plot(data_rms, zp, 'ko-')
+plt.xlabel(r'$\theta_{rms}$')
+plt.ylabel(r'$z$', rotation=0)
+ax2.set_ylim(0, 0.1)
+
+savefile = 'rms_profile_' + entry + '_zoom.png'
+plt.savefig(savefile)
+
+
 #plt.show()
 

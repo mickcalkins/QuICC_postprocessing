@@ -12,7 +12,7 @@ import compute_stats
 
 
 # provide the name of the file to be read - no need for .hdf5
-filename = 'visState0000'
+filename = 'visState0000.hdf5'
 
 # import relevant parameters/quantities/arrays - model specific
 Ra, Pr = read_visState.read_params_RBC(filename)
@@ -92,6 +92,7 @@ zp = 0.5*(1. - z)
 plt.plot(data_rms, zp, 'ko-')
 plt.xlabel(entry)
 plt.ylabel(r'$z$', rotation=0)
+plt.ylim([0, 1e-1])
 
 savefile = 'rms_profile_' + entry + '.png'
 plt.savefig(savefile)
