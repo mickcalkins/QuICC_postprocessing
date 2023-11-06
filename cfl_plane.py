@@ -47,16 +47,34 @@ dx = abs(x[1]-x[0])
 y = np.linspace(0, Gamma, num=np.size(y_c), endpoint=False) 
 dy = abs(y[1]-y[0])
 
-dt_z = np.zeros((Nx,Ny,Nz))
-dt_x = np.zeros((Nx,Ny,Nz))
-dt_y = np.zeros((Nx,Ny,Nz))
+# computes for the entire volume...slow for large jobs
+#dt_z = np.zeros((Nx,Ny,Nz))
+#dt_x = np.zeros((Nx,Ny,Nz))
+#dt_y = np.zeros((Nx,Ny,Nz))
+
+#for i in range(0, Nx):
+#    for j in range(0, Ny):
+#        for k in range(0, Nz):
+#            dt_z[i,j,k] = abs(dz[k]/uz[k,i,j])
+#            dt_x[i,j,k] = abs(dx/ux[k,i,j])
+#            dt_y[i,j,k] = abs(dy/uy[k,i,j])
+
+# computes dt_z at midplane and dt_x/dt_y at midplane and boundaries
+dt_z = np.zeros((Nx,Ny))
+dt_x = np.zeros((Nx,Ny,3))
+dt_y = np.zeros((Nx,Ny,3))
 
 for i in range(0, Nx):
     for j in range(0, Ny):
-        for k in range(0, Nz):
-            dt_z[i,j,k] = abs(dz[k]/uz[k,i,j])
-            dt_x[i,j,k] = abs(dx/ux[k,i,j])
-            dt_y[i,j,k] = abs(dy/uy[k,i,j])
+            dt_z[i,j] = abs(dz[int(Nz/2)]/uz[int(Nz/2),i,j])
+            dt_x[i,j,0] = abs(dx/ux[int(Nz/2),i,j])
+            dt_x[i,j,1] = abs(dx/ux[0,i,j])
+            dt_x[i,j,2] = abs(dx/ux[-1,i,j])
+            dt_y[i,j,0] = abs(dy/uy[int(Nz/2),i,j])
+            dt_y[i,j,1] = abs(dy/uy[0,i,j])
+            dt_y[i,j,2] = abs(dy/uy[-1,i,j])
+
+
 
 dt_x_min = np.min(dt_x)
 dt_y_min = np.min(dt_y)
