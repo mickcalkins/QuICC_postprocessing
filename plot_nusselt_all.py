@@ -40,10 +40,11 @@ Nu_std = round(np.std(Nu), 4)
 Nusselt = 'Nu = ' + str(Nu_ave) + ' +/- ' + str(Nu_std)
 print('Time-averaged Nusselt # =', Nu_ave, '+/-', Nu_std)
 
-plt.plot(time,Nu)
-plt.plot(time,Nu_moving_average, '--')
+plt.plot(time, Nu, label='Raw Data')
+plt.plot(time, Nu_moving_average, '--', label='Cumulative Average')
 plt.xlabel('time')
 plt.ylabel('Nusselt')
+plt.legend()
 
 plt.annotate(Nusselt, xy=(0.5, 0.95), xycoords='axes fraction')
 

@@ -6,6 +6,7 @@ Usage: python plot_ke_quicc.py RRBC rotation
 
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 import read_parameter_file 
 import sys
 
@@ -58,12 +59,15 @@ if timescale == 'viscous':
 elif timescale == 'rotation':
    Re = (1.0/Ek)*np.sqrt(2.*ke)
 
-#Rm = np.sqrt(2.*ke)
-#Re = Rm/Pm 
+# cumulative average
+Re_series = pd.Series(Re)
+windows = Re_series.expanding()
+moving_averages = windows.mean()
+Re_moving_averages = moving_averages.tolist()
 
-# compute basic stats
-#Rm_ave = np.mean(Rm)
-#Rm_std = np.std(Rm)
+# exponentially weighted average
+moving_averages_exp = round(Re_series.ewm(alpha=0.005, adjust=False).mean(), 2)
+Re_moving_averages_exp = moving_averages_exp.tolist()
 
 Re_ave = round(np.mean(Re), 4)
 Re_std = round(np.std(Re), 4)
@@ -78,14 +82,13 @@ f.close()
 #plt.rcParams["mathtext.fontset"] = "cm"
 #plt.rcParams.update({'font.size': 10})
 
-#plt.plot(time,ke)
-plt.plot(time,Re)
-#plt.plot(time,Re_ave*np.ones(len(time)), 'k--')
-#plt.plot(time,Re_ave*np.ones(len(time))+Re_std, 'k-.')
-#plt.plot(time,Re_ave*np.ones(len(time))-Re_std, 'k-.')
-plt.xlabel(r'$t$')
-plt.ylabel(r'$Re$', rotation=0)
-#plt.ylabel(r'$KE$', rotation=0)
+plt.plot(time, Re, label=r'Raw Data')
+plt.plot(time, Re_moving_averages, '--', label=r'Cumulative Average')
+#plt.plot(time, Re_moving_averages_exp, label=r'Exponential Average')
+plt.xlabel(r'time')
+plt.ylabel(r'Reynolds', rotation=90)
+
+plt.legend()
 
 plt.annotate(Reynolds, xy=(0.5, 0.95), xycoords='axes fraction')
 
